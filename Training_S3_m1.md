@@ -1,8 +1,4 @@
-# inventario_tienda.py
-
-# Diccionario para almacenar productos: clave = nombre, valor = (precio, cantidad)
-inventario = {}
-
+# inventario_tienda
 ```python
 # store_inventory.py
 
