@@ -4,104 +4,110 @@
 inventario = {}
 
 ```python
-# Función para añadir un producto
-def agregar_producto(nombre, precio, cantidad):
-    if nombre in inventario:
-        print("El producto ya existe. Use la opción de actualizar si desea cambiar los datos.")
+# store_inventory.py
+
+# Dictionary to store products: key = name, value = (price, quantity)
+inventory = {}
+
+# Function to add a product to the inventory
+def add_product(name, price, quantity):
+    if name in inventory:
+        print("Product already exists. Use the update option to change its data.")
     else:
-        inventario[nombre] = (precio, cantidad)
-        print(f"Producto '{nombre}' añadido con éxito.")
+        inventory[name] = (price, quantity)
+        print(f"Product '{name}' successfully added.")
 
-# Función para buscar un producto
-def buscar_producto(nombre):
-    return inventario.get(nombre, None)
+# Function to search for a product by name
+def search_product(name):
+    return inventory.get(name, None)
 
-# Función para actualizar el precio de un producto existente
-def actualizar_precio(nombre, nuevo_precio):
-    if nombre in inventario:
-        cantidad = inventario[nombre][1]
-        inventario[nombre] = (nuevo_precio, cantidad)
-        print(f"Precio del producto '{nombre}' actualizado a {nuevo_precio}.")
+# Function to update the price of an existing product
+def update_price(name, new_price):
+    if name in inventory:
+        quantity = inventory[name][1]
+        inventory[name] = (new_price, quantity)
+        print(f"Price of product '{name}' updated to {new_price}.")
     else:
-        print("Producto no encontrado.")
+        print("Product not found.")
 
-# Función para eliminar un producto
-def eliminar_producto(nombre):
-    if nombre in inventario:
-        del inventario[nombre]
-        print(f"Producto '{nombre}' eliminado del inventario.")
+# Function to remove a product from the inventory
+def remove_product(name):
+    if name in inventory:
+        del inventory[name]
+        print(f"Product '{name}' removed from inventory.")
     else:
-        print("Producto no encontrado.")
+        print("Product not found.")
 
-# Función para calcular el valor total del inventario usando lambda
-def calcular_valor_total():
-    total = sum(map(lambda item: item[1][0] * item[1][1], inventario.items()))
+# Function to calculate the total value of the inventory using a lambda function
+def calculate_total_value():
+    total = sum(map(lambda item: item[1][0] * item[1][1], inventory.items()))
     return total
+    # item[1][0] = price, item[1][1] = quantity → price * quantity for each product
 
-# Función para validar entrada numérica
-def solicitar_numero(mensaje):
+# Function to validate numeric input from the user
+def request_number(message):
     while True:
-        entrada = input(mensaje)
-        if entrada.replace('.', '', 1).isdigit():
-            return float(entrada)
+        entry = input(message)
+        if entry.replace('.', '', 1).isdigit():
+            return float(entry)
         else:
-            print("Entrada inválida. Por favor, ingrese un número.")
+            print("Invalid input. Please enter a number.")
 
-# Menú interactivo
+# Interactive menu
 def menu():
     while True:
-        print("\n--- MENÚ DE INVENTARIO ---")
-        print("1. Añadir producto")
-        print("2. Consultar producto")
-        print("3. Actualizar precio")
-        print("4. Eliminar producto")
-        print("5. Calcular valor total del inventario")
-        print("6. Ver todos los productos")
-        print("7. Salir")
+        print("\n--- INVENTORY MENU ---")
+        print("1. Add product")
+        print("2. Search product")
+        print("3. Update product price")
+        print("4. Remove product")
+        print("5. Calculate total inventory value")
+        print("6. Show all products")
+        print("7. Exit")
 
-        opcion = input("Seleccione una opción (1-7): ")
+        option = input("Choose an option (1-7): ")
 
-        if opcion == "1":
-            nombre = input("Nombre del producto: ")
-            precio = solicitar_numero("Precio del producto: ")
-            cantidad = solicitar_numero("Cantidad disponible: ")
-            agregar_producto(nombre, precio, int(cantidad))
+        if option == "1":
+            name = input("Product name: ")
+            price = request_number("Product price: ")
+            quantity = request_number("Available quantity: ")
+            add_product(name, price, int(quantity))
 
-        elif opcion == "2":
-            nombre = input("Nombre del producto a buscar: ")
-            resultado = buscar_producto(nombre)
-            if resultado:
-                print(f"Producto: {nombre}, Precio: {resultado[0]}, Cantidad: {resultado[1]}")
+        elif option == "2":
+            name = input("Enter product name to search: ")
+            result = search_product(name)
+            if result:
+                print(f"Product: {name}, Price: {result[0]}, Quantity: {result[1]}")
             else:
-                print("Producto no encontrado.")
+                print("Product not found.")
 
-        elif opcion == "3":
-            nombre = input("Nombre del producto a actualizar: ")
-            nuevo_precio = solicitar_numero("Nuevo precio: ")
-            actualizar_precio(nombre, nuevo_precio)
+        elif option == "3":
+            name = input("Enter product name to update: ")
+            new_price = request_number("New price: ")
+            update_price(name, new_price)
 
-        elif opcion == "4":
-            nombre = input("Nombre del producto a eliminar: ")
-            eliminar_producto(nombre)
+        elif option == "4":
+            name = input("Enter product name to remove: ")
+            remove_product(name)
 
-        elif opcion == "5":
-            total = calcular_valor_total()
-            print(f"Valor total del inventario: ${total:.2f}")
+        elif option == "5":
+            total = calculate_total_value()
+            print(f"Total inventory value: ${total:.2f}")
 
-        elif opcion == "6":
-            if inventario:
-                for nombre, (precio, cantidad) in inventario.items():
-                    print(f"{nombre} - Precio: ${precio}, Cantidad: {cantidad}")
+        elif option == "6":
+            if inventory:
+                for name, (price, quantity) in inventory.items():
+                    print(f"{name} - Price: ${price}, Quantity: {quantity}")
             else:
-                print("El inventario está vacío.")
+                print("Inventory is empty.")
 
-        elif opcion == "7":
-            print("Saliendo del programa.")
+        elif option == "7":
+            print("Exiting program.")
             break
 
         else:
-            print("Opción inválida. Intente nuevamente.")
+            print("Invalid option. Please try again.")
 
-# Ejecutar el menú principal
+# Run the main menu
 menu()
 ```
