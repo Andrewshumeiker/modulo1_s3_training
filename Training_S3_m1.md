@@ -3,6 +3,7 @@
 # Diccionario para almacenar productos: clave = nombre, valor = (precio, cantidad)
 inventario = {}
 
+```python
 # Función para añadir un producto
 def agregar_producto(nombre, precio, cantidad):
     if nombre in inventario:
@@ -103,4 +104,4 @@ def menu():
 
 # Ejecutar el menú principal
 menu()
-
+```
