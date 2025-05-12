@@ -1,3 +1,4 @@
+```python
 #dictionary with 5 default products
 products = [
     {"name":"sal","quantity":"100","price":"2550"},
@@ -148,3 +149,4 @@ def main (): #main menu function
         print("invalid option try again.\n")
 
 main()
+```
